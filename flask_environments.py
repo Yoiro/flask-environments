@@ -10,6 +10,12 @@
 """
 
 import os
+import sys
+
+if sys.version_info[0] < 3:
+    iter = dic.iterkeys
+else:
+    iter = dic.keys
 
 import yaml
 from flask import current_app
@@ -66,7 +72,7 @@ class Environments(object):
 
         app = self.get_app()
 
-        for key in c.iterkeys():
+        for key in c.iter():
             if key.isupper():
                 app.config[key] = c[key]
 
